@@ -1,0 +1,6 @@
+{
+    "SLACK_WEBHOOK_URL": "",
+    "USCIS_URL": "https://egov.uscis.gov/casestatus/mycasestatus.do",
+    "RECEIPT_NUMBER": "IOE1234567890",
+    "DEFAULT_STATUS": "Case Is Being Actively Reviewed By USCIS"
+}
