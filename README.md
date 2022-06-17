@@ -1,5 +1,6 @@
 # USCIS Case Tracker
 
+
 ## About
 I created this mini program to check my H1B case transfer status hourly and send message to a Slack webhook.
 
@@ -10,7 +11,8 @@ When the case status changes, as in being different from the `DEFAULT_STATUS` sp
 
 I configured the code to run on AWS Lambda, with a hourly cron job configured on AWS Cloudwatch triggering the Lambda function. `deploy.sh` builds the file needed to upload to AWS Lambda.
 
-To run the code in local, see command in `dev_start.sh`
+To run the code in local, see command in `dev_start.sh`.
+
 
 ## Environment variables
 
