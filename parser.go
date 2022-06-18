@@ -7,11 +7,12 @@ import (
 	"golang.org/x/net/html"
 )
 
-func Parse(source string) string {
+func Parse(source string) (string, error) {
 	var result string
 	doc, err := html.Parse(strings.NewReader(source))
 	if err != nil {
 		log.Fatalln("Error parsing html source")
+		return "", err
 	}
 	var f func(*html.Node)
 	f = func(n *html.Node) {
@@ -25,5 +26,5 @@ func Parse(source string) string {
 	}
 	f(doc)
 	log.Printf("Latest status is: %v", result)
-	return result
+	return result, nil
 }

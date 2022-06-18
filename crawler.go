@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-func Crawl() string {
+func Crawl() (string, error) {
 	env := os.Getenv("ENV")
 	if env != "prod" {
 		log.Println("Mocking request to USCIS...")
@@ -24,7 +24,7 @@ func Crawl() string {
 				</div>
 			</body>
 		</html>
-		`
+		`, nil
 	}
 	sourceURL := viper.Get("USCIS_URL").(string)
 	receiptNumber := viper.Get("RECEIPT_NUMBER").(string)
@@ -43,12 +43,14 @@ func Crawl() string {
 
 	if err != nil {
 		log.Fatalf("Request error %v\n", err)
+		return "", err
 	}
 
 	log.Println("Making real request to USCIS...")
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Fatalf("Resposne error %v\n", err)
+		return "", err
 	}
 
 	defer resp.Body.Close()
@@ -57,7 +59,8 @@ func Crawl() string {
 
 	if err != nil {
 		log.Fatalf("Response body parsing error %v\n", err)
+		return "", err
 	}
 
-	return string(body)
+	return string(body), nil
 }
